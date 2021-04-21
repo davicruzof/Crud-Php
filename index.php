@@ -50,12 +50,12 @@
 						</thead>
 						<tbody>
 						<?php
-							echo "cheguei no for";
 							foreach ($devedores as $devedor) {
-								echo "entrei no for";
 								$divida = Divida::getDivida($devedor->id);
 								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+								echo $divida->status;
 								if ($divida->status == 0) {
+									echo "entrei pelo if";
 									?>
 									<tr>
 										<td><?= $devedor->id ?></td>
