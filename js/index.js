@@ -28,14 +28,14 @@ const valida_documento = (objeto) => {
 	} else {
 		if (objeto.value.length <= 14) {
 			fMasc(objeto, mCPF)
-			if(validarCPF(objeto.value)){
+			if (validarCPF(objeto.value)) {
 				document.getElementById('valid-feedback-cpf').innerText = "Válido!"
 				document.getElementById('valid-feedback-cpf').style.color = "green"
 			}
-		}else{
+		} else {
 			if (objeto.value.length > 14 <= 18) {
 				fMasc(objeto, mCNPJ)
-				if(validarCNPJ(objeto.value)){
+				if (validarCNPJ(objeto.value)) {
 					document.getElementById('valid-feedback-cpf').innerText = "Válido!"
 					document.getElementById('valid-feedback-cpf').style.color = "green"
 				}
@@ -45,26 +45,9 @@ const valida_documento = (objeto) => {
 }
 
 const valida_cep = (objeto) => {
-	document.getElementById('valid-feedback-cpf').style.display = "block"
-	if (objeto.value.length < 8) {
-		document.getElementById('valid-feedback-cpf').innerText = "Inválido!"
-		document.getElementById('valid-feedback-cpf').style.color = "red"
-	} else {
-			fMasc(objeto, mCEP)
-		console.log(pesquisacep(objeto.value))
-			if(validarCPF(objeto.value)){
-				document.getElementById('valid-feedback-cpf').innerText = "Válido!"
-				document.getElementById('valid-feedback-cpf').style.color = "green"
-			}
-		// }else{
-		// 	if (objeto.value.length > 14 <= 18) {
-		// 		fMasc(objeto, mCNPJ)
-		// 		if(validarCNPJ(objeto.value)){
-		// 			document.getElementById('valid-feedback-cpf').innerText = "Válido!"
-		// 			document.getElementById('valid-feedback-cpf').style.color = "green"
-		// 		}
-		// 	}
-		// }
+	fMasc(objeto, mCEP)
+	if (objeto.value.length == 10) {
+		pesquisacep(objeto.value)
 	}
 }
 
@@ -141,9 +124,9 @@ function validarCPF(cpf) {
 
 function validarCNPJ(cnpj) {
 
-	cnpj = cnpj.replace(/[^\d]+/g,'');
+	cnpj = cnpj.replace(/[^\d]+/g, '');
 
-	if(cnpj == '') return false;
+	if (cnpj == '') return false;
 
 	if (cnpj.length != 14)
 		return false;
@@ -163,7 +146,7 @@ function validarCNPJ(cnpj) {
 
 	// Valida DVs
 	tamanho = cnpj.length - 2
-	numeros = cnpj.substring(0,tamanho);
+	numeros = cnpj.substring(0, tamanho);
 	digitos = cnpj.substring(tamanho);
 	soma = 0;
 	pos = tamanho - 7;
@@ -177,7 +160,7 @@ function validarCNPJ(cnpj) {
 		return false;
 
 	tamanho = tamanho + 1;
-	numeros = cnpj.substring(0,tamanho);
+	numeros = cnpj.substring(0, tamanho);
 	soma = 0;
 	pos = tamanho - 7;
 	for (i = tamanho; i >= 1; i--) {
@@ -195,25 +178,26 @@ function validarCNPJ(cnpj) {
 
 function limpa_formulário_cep() {
 	//Limpa valores do formulário de cep.
-	document.getElementById('rua').value=("");
-	document.getElementById('bairro').value=("");
-	document.getElementById('cidade').value=("");
-	document.getElementById('uf').value=("");
-	document.getElementById('ibge').value=("");
+	document.getElementById('rua').value = ("");
+	document.getElementById('bairro').value = ("");
+	document.getElementById('cidade').value = ("");
+	document.getElementById('estado').value = ("");
+	document.getElementById('complemento').value = ("");
 }
 
 function meu_callback(conteudo) {
 	if (!("erro" in conteudo)) {
 		//Atualiza os campos com os valores.
-		document.getElementById('rua').value=(conteudo.logradouro);
-		document.getElementById('bairro').value=(conteudo.bairro);
-		document.getElementById('cidade').value=(conteudo.localidade);
-		document.getElementById('uf').value=(conteudo.uf);
-		document.getElementById('ibge').value=(conteudo.ibge);
+		document.getElementById('rua').value = (conteudo.logradouro);
+		document.getElementById('bairro').value = (conteudo.bairro);
+		document.getElementById('cidade').value = (conteudo.localidade);
+		document.getElementById('estado').value = (conteudo.uf);
+		document.getElementById('complemento').value = (conteudo.complemento);
 	} //end if.
 	else {
 		//CEP não Encontrado.
 		limpa_formulário_cep();
+		document.getElementById('cep').value = "";
 		alert("CEP não encontrado.");
 	}
 }
@@ -230,34 +214,40 @@ function pesquisacep(valor) {
 		var validacep = /^[0-9]{8}$/;
 
 		//Valida o formato do CEP.
-		if(validacep.test(cep)) {
+		if (validacep.test(cep)) {
 
-			//Preenche os campos com "..." enquanto consulta webservice.
-			// document.getElementById('rua').value="...";
-			// document.getElementById('bairro').value="...";
-			// document.getElementById('cidade').value="...";
-			// document.getElementById('uf').value="...";
-			// document.getElementById('ibge').value="...";
+			limpa_formulário_cep();
 
 			//Cria um elemento javascript.
 			var script = document.createElement('script');
 
 			//Sincroniza com o callback.
-			script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+			script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
 
 			//Insere script no documento e carrega o conteúdo.
 			document.body.appendChild(script);
 
-		} //end if.
-		else {
-			//cep é inválido.
-			limpa_formulário_cep();
-			alert("Formato de CEP inválido.");
 		}
-	} //end if.
-	else {
+	} else {
 		//cep sem valor, limpa formulário.
-		// limpa_formulário_cep();
+		limpa_formulário_cep();
 	}
 };
+
+function formatarMoeda(elemento) {
+	var valor = elemento.value;
+
+	if(valor){
+		valor = valor + '';
+		valor = parseInt(valor.replace(/[\D]+/g,''));
+		valor = valor + '';
+		valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+		if (valor.length > 6) {
+			valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+		}
+
+		elemento.value = valor;
+	}
+}
 
