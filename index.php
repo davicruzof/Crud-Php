@@ -53,7 +53,7 @@
 							foreach ($devedores as $devedor) {
 								$divida = Divida::getDivida($devedor->id);
 								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
-								echo $divida->status;
+								var_dump($divida);
 								if ($divida->status == 0) {
 									echo "entrei pelo if";
 									?>
