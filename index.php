@@ -7,6 +7,7 @@
 	use App\Entity\Divida;
 	
 	$devedores = Devedor::getDevedores();
+	var_dump($devedores);
 ?>
 	
 	<section class="container p-5">
@@ -53,7 +54,6 @@
 							foreach ($devedores as $devedor) {
 								$divida = Divida::getDivida($devedor->id);
 								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
-								var_dump($devedor);
 								if ($divida->status == 0) {
 									echo "entrei pelo if";
 									?>
