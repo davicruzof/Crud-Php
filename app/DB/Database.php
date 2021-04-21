@@ -8,10 +8,10 @@
 	
 	class Database
 	{
-		const HOST = "databases.000webhost.com";
-		const NAME = "id16661574_receiv";
-		const USER = "root";
-		const PASS = "<)N%2}D(xFG_?-m$";
+		const HOST = "pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+		const NAME = "jswdv7l0i0onmbbu";
+		const USER = "ph4c4590ozvx4bn0";
+		const PASS = "elkll0p8weksrpca";
 		
 		private $table;
 		/**
