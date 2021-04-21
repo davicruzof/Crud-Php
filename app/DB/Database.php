@@ -8,10 +8,10 @@
 	
 	class Database
 	{
-		const HOST = "localhost";
-		const NAME = "receiv";
+		const HOST = "databases.000webhost.com";
+		const NAME = "id16661574_receiv";
 		const USER = "root";
-		const PASS = "";
+		const PASS = "<)N%2}D(xFG_?-m$";
 		
 		private $table;
 		/**
