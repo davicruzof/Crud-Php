@@ -51,17 +51,17 @@
 						<tbody>
 						<?php
 							foreach ($devedores as $devedor) {
-//								$divida = Divida::getDivida($devedor->id);
-//								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+								$divida = Divida::getDivida($devedor->id);
+								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
 //								if ($divida->status == 0) {
 //									echo "entrei pelo if";
 									?>
 									<tr>
 										<td><?= $devedor->id ?></td>
 										<td><?= $devedor->nome ?></td>
-<!--										<td>--><?//= $divida->descricao ?><!--</td>-->
-<!--										<td>--><?//= $formatter->formatCurrency($divida->valor, 'BRL') ?><!--</td>-->
-<!--										<td>--><?//= date('d/m/Y', strtotime($divida->data_vencimento)) ?><!--</td>-->
+										<td><?= $divida->descricao ?></td>
+										<td><?= $formatter->formatCurrency($divida->valor, 'BRL') ?></td>
+										<td><?= date('d/m/Y', strtotime($divida->data_vencimento)) ?></td>
 										<td>
 											<a type="button" href="editar.php?id=<?= $devedor->id ?>"
 											   class="btn btn-primary">
@@ -78,7 +78,7 @@
 										</td>
 									</tr>
 									<?php
-								}
+//								}
 							}
 						?>
 						</tbody>
