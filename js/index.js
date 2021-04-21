@@ -9,17 +9,6 @@ const valida_first = (objeto) => {
 	}
 }
 
-const valida_last = (objeto) => {
-	document.getElementById('valid-feedback-last').style.display = "block"
-	if (objeto.value.length >= 3) {
-		document.getElementById('valid-feedback-last').innerText = "Válido!"
-		document.getElementById('valid-feedback-last').style.color = "green"
-	} else {
-		document.getElementById('valid-feedback-last').innerText = "Inválido!"
-		document.getElementById('valid-feedback-last').style.color = "red"
-	}
-}
-
 const valida_documento = (objeto) => {
 	document.getElementById('valid-feedback-cpf').style.display = "block"
 	if (objeto.value.length < 11) {
@@ -182,7 +171,6 @@ function limpa_formulário_cep() {
 	document.getElementById('bairro').value = ("");
 	document.getElementById('cidade').value = ("");
 	document.getElementById('estado').value = ("");
-	document.getElementById('complemento').value = ("");
 }
 
 function meu_callback(conteudo) {
@@ -192,7 +180,6 @@ function meu_callback(conteudo) {
 		document.getElementById('bairro').value = (conteudo.bairro);
 		document.getElementById('cidade').value = (conteudo.localidade);
 		document.getElementById('estado').value = (conteudo.uf);
-		document.getElementById('complemento').value = (conteudo.complemento);
 	} //end if.
 	else {
 		//CEP não Encontrado.

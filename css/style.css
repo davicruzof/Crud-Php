@@ -46,3 +46,8 @@ header {
     width: 80%;
     display: flex;
 }
+
+td, th {
+    padding: 2% 0!important;
+    padding-left: 3%!important;
+}
