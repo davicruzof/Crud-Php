@@ -7,7 +7,6 @@
 	use App\Entity\Divida;
 	
 	$devedores = Devedor::getDevedores();
-	var_dump($devedores);
 ?>
 	
 	<section class="container p-5">
