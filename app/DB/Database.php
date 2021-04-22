@@ -8,10 +8,10 @@
 	
 	class Database
 	{
-		const HOST = "";
-		const NAME = "";
-		const USER = "";
-		const PASS = "";
+		const HOST = "pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+		const NAME = "jswdv7l0i0onmbbu";
+		const USER = "ph4c4590ozvx4bn0";
+		const PASS = "elkll0p8weksrpca";
 		
 		private $table;
 		/**
@@ -47,22 +47,31 @@
 			return $this->connection->lastInsertId();
 		}
 		
-		public function select($where = null, $order = null, $limit = null,$fields = '*')
+		public function execute($query, $params = [])
 		{
-			
+			try {
+				$statement = $this->connection->prepare($query);
+				$statement->execute($params);
+				return $statement;
+			} catch (PDOException $e) {
+				die('Erro ao enviar dados ao banco: ' . $e->getMessage());
+			}
+		}
+		
+		public function select($where = null, $order = null, $limit = null, $fields = '*')
+		{
 			$where = strlen($where) ? "WHERE {$where}" : "";
 			$order = strlen($order) ? "ORDER BY {$order}" : "";
 			$limit = strlen($limit) ? "LIMIT {$limit}" : "";
 			$query = "SELECT {$fields} FROM {$this->table} {$where} {$order} {$limit} ";
-			
 			return $this->execute($query);
 		}
 		
-		public function update($where,$values)
+		public function update($where, $values)
 		{
 			$fields = array_keys($values);
 			$query = "UPDATE {$this->table} SET " . implode('=?,', $fields) . "=? WHERE {$where}";
-			$this->execute($query,array_values($values));
+			$this->execute($query, array_values($values));
 			
 			return true;
 		}
@@ -73,15 +82,5 @@
 			$this->execute($query);
 			
 			return true;
-		}
-		public function execute($query, $params = [])
-		{
-			try {
-				$statement = $this->connection->prepare($query);
-				$statement->execute($params);
-				return $statement;
-			} catch (PDOException $e) {
-				die('Erro ao enviar dados ao banco: ' . $e->getMessage());
-			}
 		}
 	}
