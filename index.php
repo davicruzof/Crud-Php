@@ -9,7 +9,7 @@
 	$devedores = Devedor::getDevedores();
 ?>
 	
-	<section class="container p-5">
+	<section class="container mt-3">
 		<a type="button" href="form.php" class="btn btn-primary">Adicionar
 			divida
 		</a>
@@ -37,12 +37,10 @@
 			if (count($devedores) > 0) {
 				?>
 				<div class="mt-5">
-					<table class="table bg-light pl-5" style="border-radius: 4px">
+					<table class="table bg-light" style="border-radius: 4px">
 						<thead>
 						<tr>
-							<th>Id</th>
 							<th>Nome</th>
-							<th>Descrição</th>
 							<th>Valor</th>
 							<th>Vencimento</th>
 							<th>Ações</th>
@@ -56,9 +54,7 @@
 								if ($divida->status == 0) {
 									?>
 									<tr>
-										<td><?= $devedor->id ?></td>
 										<td><?= $devedor->nome ?></td>
-										<td><?= $divida->descricao ?></td>
 										<td><?= $formatter->formatCurrency($divida->valor, 'BRL') ?></td>
 										<td><?= date('d/m/Y', strtotime($divida->data_vencimento)) ?></td>
 										<td>
@@ -83,7 +79,7 @@
 						</tbody>
 					</table>
 				</div>
-			<?php }else{
+			<?php } else {
 				?>
 				<div class="bg-secondary mt-5 p-3 text-center" style="border-radius: 4px">
 					Nenhuma divida cadastrada
