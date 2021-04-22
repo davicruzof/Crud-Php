@@ -16,7 +16,8 @@ header {
 }
 
 .title{
-    color: var(--color-red)
+    color: var(--color-red)!important;
+    text-decoration: none;
 }
 
 .modal-content {

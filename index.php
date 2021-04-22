@@ -35,59 +35,52 @@
 				<?php
 			}
 			if (count($devedores) > 0) {
-				?>
-				<div class="mt-5">
-					<table class="table bg-light" style="border-radius: 4px">
-						<thead>
-						<tr>
-							<th scope="col">Nome</th>
-							<th scope="col">Valor</th>
-							<th scope="col">Vencimento</th>
-							<th scope="col">Ações</th>
-						</tr>
-						</thead>
-						<tbody>
-						<?php
-							foreach ($devedores as $devedor) {
-								$divida = Divida::getDivida($devedor->id);
-								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
-								if ($divida->status == 0) {
-									?>
-									<tr>
-										<td scope="row"><?= $devedor->nome ?></td>
-										<td><?= $formatter->formatCurrency($divida->valor, 'BRL') ?></td>
-										<td><?= date('d/m/Y', strtotime($divida->data_vencimento)) ?></td>
-										<td>
-											<a type="button" href="editar.php?id=<?= $devedor->id ?>"
-											   class="btn btn-primary">
-												Editar
-											</a>
-											<a type="button" href="app/Controllers/Pagar.php?id=<?= $devedor->id ?>"
-											   class="btn btn-success">
-												Pagar
-											</a>
-											<a type="button" href="app/Controllers/Remove.php?id=<?= $devedor->id ?>"
-											   class="btn btn-danger">
-												Excluir
-											</a>
-										</td>
-									</tr>
-									<?php
-								}
-							}
-						?>
-						</tbody>
-					</table>
-				</div>
-			<?php } else {
+		?>
+		<div class="mt-5 row p-3">
+			<?php
+				foreach ($devedores as $devedor) {
+					$divida = Divida::getDivida($devedor->id);
+					$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+					if ($divida->status == 0) { ?>
+						<div class="col-md-4 card text-dark mb-2">
+							<div class="card-header" style="    margin-top: 3%; border-bottom: 0!important;">
+								<h5 class="card-title text-center">Devedor</h5>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Cliente: <?= $devedor->nome ?></h5>
+								<h5 class="card-title">
+									Valor: <?= $formatter->formatCurrency($divida->valor, 'BRL') ?></h5>
+								<h5 class="card-title">
+									Vencimento: <?= date('d/m/Y', strtotime($divida->data_vencimento)) ?></h5>
+								<p class="card-text">Descrição: <?= $divida->descricao ?></p>
+								<div class="row justify-content-between">
+									<a type="button" href="editar.php?id=<?= $devedor->id ?>" class=" btn btn-primary">
+										Editar
+									</a>
+									<a type="button" onclick="pagar('<?= $devedor->id ?>')"
+									   class="btn btn-success mt-2">
+										Pagar
+									</a>
+									<a type="button" onclick="remove('<?= $devedor->id ?>')"
+									   class=" btn btn-danger mt-2">
+										Excluir
+									</a>
+								</div>
+							</div>
+						</div>
+					<?php }
+				}
+				} else {
 				?>
 				<div class="bg-secondary mt-5 p-3 text-center" style="border-radius: 4px">
 					Nenhuma divida cadastrada
 				</div>
 				<?php
 			} ?>
+	
 	</section>
 
 <?php
+	
 	
 	include __DIR__ . "/global/footer.php";

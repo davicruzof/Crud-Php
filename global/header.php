@@ -19,6 +19,6 @@
 
 <header>
 	<div class="text-light pt-3 pb-3 d-flex justify-content-center w-100">
-		<h3 class="title">Devedores</h3>
+		<h3><a class="title" href="index.php">Devedores</a></h3>
 	</div>
 </header>

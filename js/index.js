@@ -40,6 +40,20 @@ const valida_cep = (objeto) => {
 	}
 }
 
+const remove = (id) => {
+	let resposta = confirm('Deseja mesmo remover?');
+	if(resposta){
+		location.href = `app/Controllers/Remove.php?id=${id}`;
+	}
+}
+
+const pagar = (id) => {
+	let resposta = confirm('Deseja mesmo confirmar o pagamento?');
+	if(resposta){
+		location.href = `app/Controllers/Pagar.php?id=${id}`;
+	}
+}
+
 function fMasc(objeto, mascara) {
 	obj = objeto
 	masc = mascara
