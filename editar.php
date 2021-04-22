@@ -123,12 +123,13 @@
 				<label for="valor" class="form-label">Valor</label>
 				<input type="text" class="form-control" id="valor" onkeypress="formatarMoeda(this)"
 				       onkeyup="formatarMoeda(this)" onkeydown="formatarMoeda(this)" name="valor" placeholder="0,00"
-				       required autocomplete="off" value="<?= number_format($divida->valor,2,',','.') ?>">
+				       required autocomplete="off" value="<?= number_format($divida->valor, 2, ',', '.') ?>">
 			</div>
 			<div class="form-group col-md-6">
 				<label for="vencimento" class="form-label">Data de vencimento</label>
 				<input type="date" class="form-control" id="vencimento" name="data_vencimento"
-				       required autocomplete="off" value="<?= $divida->data_vencimento ?>">
+				       required min="<?php echo date('Y-m-d'); ?>" autocomplete="off"
+				       value="<?= $divida->data_vencimento ?>">
 			</div>
 			<div class="form-group col-md-6"></div>
 			<div class="col-md-6 mt-5">

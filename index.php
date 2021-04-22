@@ -40,10 +40,10 @@
 					<table class="table bg-light" style="border-radius: 4px">
 						<thead>
 						<tr>
-							<th>Nome</th>
-							<th>Valor</th>
-							<th>Vencimento</th>
-							<th>Ações</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Valor</th>
+							<th scope="col">Vencimento</th>
+							<th scope="col">Ações</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -54,7 +54,7 @@
 								if ($divida->status == 0) {
 									?>
 									<tr>
-										<td><?= $devedor->nome ?></td>
+										<td scope="row"><?= $devedor->nome ?></td>
 										<td><?= $formatter->formatCurrency($divida->valor, 'BRL') ?></td>
 										<td><?= date('d/m/Y', strtotime($divida->data_vencimento)) ?></td>
 										<td>

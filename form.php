@@ -102,7 +102,8 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="vencimento" class="form-label">Data de vencimento</label>
-				<input type="date" class="form-control" id="vencimento" name="data_vencimento" min="<?php echo date('Y-m-d'); ?>"
+				<input type="date" class="form-control" id="vencimento" name="data_vencimento"
+				       min="<?php echo date('Y-m-d'); ?>"
 				       required autocomplete="off">
 			</div>
 			<div class="form-group col-md-6"></div>
