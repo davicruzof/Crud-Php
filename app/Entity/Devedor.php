@@ -36,6 +36,12 @@
 				->fetchObject(self::class);
 		}
 		
+		public static function getDevedorDocumento($doc)
+		{
+			return (new Database('devedor'))->select("documento='{$doc}'")
+				->fetchObject(self::class);
+		}
+		
 		/**
 		 * metodo de cadastrar um novo devedor
 		 */

@@ -30,6 +30,7 @@
 						foreach ($errors as $error) {
 							echo $error . '<br/>';
 						}
+						session_destroy();
 					?>
 				</div>
 				<?php
