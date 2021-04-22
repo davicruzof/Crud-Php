@@ -1,7 +1,7 @@
 <?php
+	session_start();
 	require __DIR__ . "/vendor/autoload.php";
 	include __DIR__ . "/global/header.php";
-	session_start();
 	
 	use App\Entity\Devedor;
 	use App\Entity\Divida;
@@ -53,8 +53,7 @@
 							foreach ($devedores as $devedor) {
 								$divida = Divida::getDivida($devedor->id);
 								$formatter = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
-//								if ($divida->status == 0) {
-//									echo "entrei pelo if";
+								if ($divida->status == 0) {
 									?>
 									<tr>
 										<td><?= $devedor->id ?></td>
@@ -78,7 +77,7 @@
 										</td>
 									</tr>
 									<?php
-//								}
+								}
 							}
 						?>
 						</tbody>
