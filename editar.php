@@ -1,7 +1,7 @@
 <?php
+	session_start();
 	require __DIR__ . "/vendor/autoload.php";
 	include __DIR__ . "/global/header.php";
-	session_start();
 	
 	use App\Entity\Devedor;
 	use App\Entity\Divida;
